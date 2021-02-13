@@ -16,3 +16,7 @@ export const Content = styled.View `
     background-color: ${colors.darkdefault};
 
 `
+
+export const Menu = styled.FlatList `
+    flex: 1;
+`
