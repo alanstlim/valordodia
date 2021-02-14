@@ -1,7 +1,7 @@
 import React from 'react';
-import { useEffect } from 'react-native';
 
 import { Container, Content, Title, Flag, Input } from './styles';
+
 import ars from '../../assets/ARS.png';
 import aud from '../../assets/AUD.png';
 import btc from '../../assets/BTC.png';

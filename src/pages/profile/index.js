@@ -9,7 +9,7 @@ export default function Profile () {
 
     return (
         <Container>
-            <StatusBar barStyle='dark-content' backgroundColor={colors.secondary} />
+            <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Header title={"Configurações"} />
             <Content>
                 

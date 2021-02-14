@@ -4,7 +4,7 @@ import colors from '../../config/colors';
 export const Container = styled.View `
     height: 100px;
     width: 100%;
-    background-color: ${colors.secondary};
+    background-color: ${colors.primary};
     align-items: center;
     justify-content: space-between;
     elevation: 8;

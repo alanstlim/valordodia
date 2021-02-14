@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StatusBar} from 'react-native';
+import { StatusBar } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { Container, Content, Title } from './styles';
@@ -12,7 +12,7 @@ export default function Home() {
     return (
 
         <Container>
-            <StatusBar barStyle='dark-content' backgroundColor={colors.secondary} />
+            <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Header title={"Cotação"} />
             <Content>
                 <Card />

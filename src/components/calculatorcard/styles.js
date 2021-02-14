@@ -3,7 +3,6 @@ import colors from '../../config/colors';
 
 
 export const Container = styled.View `
-
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +15,7 @@ export const Content = styled.View `
 export const Title = styled.Text `
     font-size: 18px;
     font-weight: bold;
-    color: ${colors.white};
+    color: ${colors.secondary};
     margin: 5px;
 `;
 
