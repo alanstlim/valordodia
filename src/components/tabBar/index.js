@@ -17,7 +17,7 @@ export default ({ navigation }) => {
             </TabItem>
             <TouchableHighlight onPress={() => Actions.home()}>
                 <TabItemCenter color={navigation.state.index === 0 ? colors.white : colors.dark}>
-                    <Icon name="cash-outline" size={32} color={navigation.state.index === 0 ? colors.dark : colors.white} />
+                    <Icon name="cash-outline" size={32} color={navigation.state.index === 0 ? colors.dark : colors.primary} />
                 </TabItemCenter>
             </TouchableHighlight>
             <TabItem  onPress={() => Actions.profile()}>

@@ -1,25 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { Container, Logo, Title } from './styles';
 import api from '../../services/api';
+import { setLocalUser, getLocalUser } from '../../services/storage';
 import colors from '../../config/colors';
 import pig from '../../assets/pig.png';
 
 export default function SplashScreen() {
 
+    const [currentUser, SetCurrentUser] = useState(null);
+
     useEffect(() => {
-        // const timer = setTimeout(() => {
-        //     Actions.bottomBar()
-        // }, 2000)
-        loadData();
+        checkUser();
     }, [])
 
-    const loadData = async () => {
+    const checkUser = async () => {
 
+        getLocalUser().then((localUser) => {
+            SetCurrentUser(localUser);
+        });
+
+        // if (currentUser === null) {
+        //     // abrir modal e pedir para selecionar até 4 moedas
+        // } else {
+        //     loadData();
+        // }
+        loadData();
+    }
+
+    const loadData = async () => {
         const response = await api.get("/all");
-        console.log(response.data);
+        setLocalUser({
+            currency1: response.data.CAD,
+            currency2: response.data.USD,
+            currency3: '',
+            currency4: '',
+        });
+        navigateScreen();
+    }
+
+    const navigateScreen = () => {
+        const timer = setTimeout(() => {
+            Actions.bottomBar()
+        }, 2000)
     }
 
     return (

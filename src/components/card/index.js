@@ -23,6 +23,7 @@ export default function Card({
     high='',
     low='',
     varBid='',
+    bid='',
 }) {
 
     switch (currency) {
@@ -66,15 +67,15 @@ export default function Card({
 
     return (
         <Container>
-            {currency === '' ? (
+            {currency !== '' ? (
                 <>
-                    <Flag source={usd} />
+                    <Flag source={currency} />
                     <Title> {name} </Title>
                     <Content>
                         <Info> Máximo : R$: {high} </Info>
                         <Info> Mínimo : R$: {low} </Info>
                         <Info> Variação : {varBid} </Info>
-                        <Info> Atual : R$ 5,25 </Info>
+                        <Info> Atual : R$ {bid} </Info>
                     </Content>
                 </>
             ) : (

@@ -46,7 +46,7 @@ export const Pig = styled.Image`
 
 export const Title = styled.Text`
     font-size: 18px;
-    color: ${colors.secondary};
+    color: ${colors.dark};
     font-weight: bold;
     margin: 10px;
 `
