@@ -10,22 +10,15 @@ import Card from '../../components/card';
 import colors from '../../config/colors';
 
 export default function Home() {
-
-    const [currency1, setCurrency1] = useState([]);
-    const [currency2, setCurrency2] = useState([]);
-    const [currency3, setCurrency3] = useState([]);
-    const [currency4, setCurrency4] = useState([]);
-    
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
         loadLocalUser();
     }, []);
 
     const loadLocalUser = async () => {
-        getLocalUser().then((localUser) => {
-            setCurrency1(localUser.currency1)
-            setCurrency2(localUser.currency2)
-            console.log(localUser.currency1)
+        await getLocalUser().then((localUser) => {
+            setUser(localUser);
         });
       };
 
@@ -35,12 +28,11 @@ export default function Home() {
             <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Header title={"Cotação"} />
             <Content>
-                <Card currency={currency1.code} name={currency1.name} high={currency1.high}
-                    low={currency1.low} varBid={currency1.varBid} bid={currency1.bid} />
-                <Card currency={currency2.code} name={currency2.name} high={currency2.high}
-                    low={currency2.low} varBid={currency2.varBid} bid={currency2.bid} />
-                <Card />
-                <Card />
+                {user.currency?.map((item, index) => {
+                    return (
+                    <Card key={index.toString()} currency={item} />
+                    );
+                })}
             </Content>
         </Container>
         

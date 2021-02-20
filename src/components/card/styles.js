@@ -45,10 +45,11 @@ export const Pig = styled.Image`
 `;
 
 export const Title = styled.Text`
-    font-size: 18px;
+    font-size: 16px;
     color: ${colors.dark};
     font-weight: bold;
-    margin: 10px;
+    text-align: center;
+    margin: 7px;
 `
 
 export const Info = styled.Text`

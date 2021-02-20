@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import api from '../../services/api';
 
 import { Container, Content, Flag, Title, Info, Pig, BottomContent, BottomText} from './styles';
 
@@ -19,58 +20,79 @@ import usd from '../../assets/USD.png';
 
 export default function Card({
     currency='',
-    name='',
-    high='',
-    low='',
-    varBid='',
-    bid='',
+    flag='',
 }) {
+    const [name, setName] = useState('');
+    const [high, setHigh] = useState('');
+    const [low, setLow] = useState('');
+    const [varBid, setVarBid] = useState('');
+    const [bid, setBid] = useState('');
+
+    useEffect(() => {
+       loadData();
+    }, []);
 
     switch (currency) {
         case 'ARS':
-            currency = ars;
+            flag = ars;
             break;
         case 'AUD':
-            currency = aud;
+            flag = aud;
             break;
         case 'BTC':
-            currency = btc;
+            flag = btc;
             break;
         case 'CAD':
-            currency = cad;
+            flag = cad;
             break;
         case 'CHF':
-            currency = chf;
+            flag = chf;
             break;
         case 'CNY':
-            currency = cny;
+            flag = cny;
             break;
         case 'EUR':
-            currency = eur;
+            flag = eur;
             break;
         case 'GBP':
-            currency = gbp;
+            flag = gbp;
             break;
         case 'ILS':
-            currency = ils;
+            flag = ils;
             break;
         case 'JPY':
-            currency = jpy;
+            flag = jpy;
             break;
         case 'LTC':
-            currency = ltc;
+            flag = ltc;
             break;
         case 'USD':
-            currency = usd;
+            flag = usd;
             break;
+    }   
+
+    const loadData = async () => {
+        if (currency !== '') {
+            await api.get(currency).then((response) => {
+                {
+                    response.data.map((item) => {
+                        setName(item.name);
+                        setHigh(item.high);
+                        setLow(item.low);
+                        setVarBid(item.varBid);
+                        setBid(item.bid);
+                    })
+                }
+            });
+        }
     }
 
     return (
         <Container>
-            {currency !== '' ? (
+            {flag !== '' ? (
                 <>
-                    <Flag source={currency} />
-                    <Title> {name} </Title>
+                    <Flag source={flag} />
+                    <Title> {name.substr(0,18)} </Title>
                     <Content>
                         <Info> Máximo : R$: {high} </Info>
                         <Info> Mínimo : R$: {low} </Info>
@@ -81,7 +103,7 @@ export default function Card({
             ) : (
                 <>
                     <Pig source={pig} />
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => loadData()}>
                     <BottomContent>
                         <BottomText> Escolha uma moeda</BottomText>
                     </BottomContent>

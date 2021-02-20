@@ -9,11 +9,12 @@ export const Container = styled.View `
 `;
 
 export const Content = styled.View `
+    width: 140px;
     align-items: center;
 `;
 
 export const Title = styled.Text `
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: ${colors.secondary};
     margin: 5px;
@@ -31,6 +32,5 @@ export const Input = styled.TextInput `
     background-color: #fff;
     margin: 5px;
     border-radius: 15px;
-    margin: 5px;
     text-align: center;
 `

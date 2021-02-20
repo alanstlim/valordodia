@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import api from '../../services/api';
 import { Container, Content, Title, Flag, Input } from './styles';
 
 import ars from '../../assets/ARS.png';
@@ -17,13 +18,19 @@ import ltc from '../../assets/LTC.png';
 import usd from '../../assets/USD.png';
 
 export default function CalculatorCard({
-    title = '',
+    currency = '',
     flag = '',
-    price = '',
-    active = '',
-
 }) {  
-    switch (flag) {
+
+    const [bid, setBid] = useState(1);
+    const [name, setName] = useState('');
+    const [currentValue, setCurrentValue] = useState(1);
+
+    useEffect(() => {
+        loadData();
+     }, []);
+
+    switch (currency) {
         case 'ARS':
             flag = ars;
             break;
@@ -62,25 +69,55 @@ export default function CalculatorCard({
             break;
     }
 
-        return (
-            <Container>
-                <Content>
-                    <Title> {title} </Title>
-                    <Flag source={flag}/>
-                    <Input 
-                        placeholder='U$ 1,00'
-                        onChangeText={text => handleCurrency(text)}
-                    />
-                </Content>
-                <Title> - </Title>
-                <Content>
-                    <Title> BRL </Title>
-                    <Flag source={brl}/>
-                    <Input 
-                        placeholder='R$ 1,00'
-                        onChangeText={text => handleReal(text)}
-                    />
-                </Content>
-            </Container>
+    const loadData = async () => {
+        if (currency !== '') {
+            await api.get(currency).then((response) => {
+                {
+                    response.data.map((item) => {
+                        setBid(item.bid);
+                        setName(item.name);
+                        setCurrentValue( item.bid );
+                    })
+                }
+            });
+        }
+    }
+
+    const handleCurrency = (value) => {
+        const result = (value * bid);
+        if (result === 0) {
+            setCurrentValue("0.00")
+        } else {
+            setCurrentValue(result.toString());
+        }
+    }
+
+    return (
+        <Container>
+            {name !== '' ? (
+                <>
+                    <Content>
+                        <Title> {name} </Title>
+                        <Flag source={flag} />
+                        <Input
+                            placeholder='U$ 1,00'
+                            keyboardType='number-pad'
+                            value={"$: " + currentValue}
+                        />
+                    </Content>
+                    <Title> - </Title>
+                    <Content>
+                        <Title> BRL </Title>
+                        <Flag source={brl} />
+                        <Input
+                        onChangeText={value => handleCurrency(value)}
+                        keyboardType='number-pad'
+                        
+                        />
+                    </Content>
+                </>
+            ) : null
+            }
+        </Container>
         );
     }

@@ -5,39 +5,52 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Logo, Title } from './styles';
 import api from '../../services/api';
 import { setLocalUser, getLocalUser } from '../../services/storage';
+import ModalCurrency from '../../components/modalcurrency';
 import colors from '../../config/colors';
 import pig from '../../assets/pig.png';
 
 export default function SplashScreen() {
 
     const [currentUser, SetCurrentUser] = useState(null);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        checkUser();
+        setIsVisible(false);
+        const timer = setTimeout(() => {
+            checkUser();
+        }, 1500)
     }, [])
 
     const checkUser = async () => {
 
-        getLocalUser().then((localUser) => {
-            SetCurrentUser(localUser);
+        await getLocalUser().then((localUser) => {
+           SetCurrentUser(localUser);
         });
-
-        // if (currentUser === null) {
-        //     // abrir modal e pedir para selecionar até 4 moedas
-        // } else {
-        //     loadData();
-        // }
-        loadData();
+     
+        if (currentUser === null) {
+            setIsVisible(true);
+        } else {
+            loadData();
+        }
     }
 
-    const loadData = async () => {
-        const response = await api.get("/all");
-        setLocalUser({
-            currency1: response.data.CAD,
-            currency2: response.data.USD,
-            currency3: '',
-            currency4: '',
-        });
+    const loadData = async (selectedCurrencies) => {
+        const listCurrency = [];
+
+            selectedCurrencies?.map((currency) => {
+                listCurrency.push(currency.code);
+            });
+
+            for (let i = listCurrency.length; i < 4; i++) {
+                listCurrency.push('');
+            }
+
+        if (listCurrency.length !== 0) {
+            setLocalUser({
+                currency: listCurrency,
+            })
+        }
+
         navigateScreen();
     }
 
@@ -48,13 +61,16 @@ export default function SplashScreen() {
     }
 
     return (
-
         <Container>
-            <StatusBar barStyle='dark-content' backgroundColor= {colors.primary} />
+            <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Logo source={pig} />
             <Title> Valor do Dia</Title>
+            <ModalCurrency
+                isVisible={isVisible}
+                hide={() => setIsVisible(false)}
+                loadData={loadData}
+            />
         </Container>
-        
     );
 
 }
