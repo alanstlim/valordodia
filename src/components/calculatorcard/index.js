@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { TextInputMask } from 'react-native-masked-text'
 
 import api from '../../services/api';
+import Loading from '../../components/loading';
+import colors from '../../config/colors';
+
 import { Container, Content, Title, Flag, Input } from './styles';
 
 import ars from '../../assets/ARS.png';
@@ -24,13 +28,15 @@ export default function CalculatorCard({
 
     const [bid, setBid] = useState(1);
     const [name, setName] = useState('');
-    const [currentValue, setCurrentValue] = useState(1);
+    const [currentValue, setCurrentValue] = useState('1,00');
+    const [realValue, setRealValue] = useState('1,00');
+    const [load, setLoad] = useState(false);
 
     useEffect(() => {
         loadData();
      }, []);
 
-    switch (currency) {
+    switch (currency.code) {
         case 'ARS':
             flag = ars;
             break;
@@ -71,53 +77,104 @@ export default function CalculatorCard({
 
     const loadData = async () => {
         if (currency !== '') {
-            await api.get(currency).then((response) => {
+            setLoad(true);
+            await api.get(currency.code).then((response) => {
                 {
                     response.data.map((item) => {
-                        setBid(item.bid);
                         setName(item.name);
-                        setCurrentValue( item.bid );
+                        setBid(parseFloat(item.bid).toFixed(2));
+                        setRealValue(parseFloat(item.bid).toFixed(2).replace('.',','));
                     })
                 }
             });
         }
+        setLoad(false);
     }
 
     const handleCurrency = (value) => {
-        const result = (value * bid);
-        if (result === 0) {
-            setCurrentValue("0.00")
-        } else {
-            setCurrentValue(result.toString());
+        let formatedValue;
+        if (value.toString().replace('$ ', '').length < 8) {
+            formatedValue = value.replace(',','.').replace('$ ', '');
+        } else {  
+            formatedValue = parseFloat(value.toString().replace('$ ', '').replace('.', '').replace(',', '.'));
         }
+        const result = ( formatedValue * bid);
+        if (result === 0) {
+            setRealValue("0,00")
+        } else {
+            setRealValue(result);
+        }
+        setCurrentValue(value);
+    }
+
+    const handleReal = (value) => {
+        let formatedValue;
+        if (value.toString().replace('R$ ', '').length < 8) {
+            formatedValue = value.replace(',','.').replace('R$ ', '');
+        } else {  
+            formatedValue = parseFloat(value.toString().replace('R$ ', '').replace('.', '').replace(',', '.'));
+        }
+        const result = ( formatedValue / bid);
+        if (result === 0) {
+            setCurrentValue("0,00")
+        } else {
+            setCurrentValue(result);
+        }
+        setRealValue(value);
     }
 
     return (
         <Container>
-            {name !== '' ? (
+            {load ? (
+                <Loading />
+            ) : (name !== '' ? (
                 <>
                     <Content>
                         <Title> {name} </Title>
                         <Flag source={flag} />
-                        <Input
-                            placeholder='U$ 1,00'
-                            keyboardType='number-pad'
-                            value={"$: " + currentValue}
+                        <TextInputMask
+                            style={{
+                                height: 40, width: 100, backgroundColor: colors.white,
+                                margin: 5, borderRadius: 15, textAlign: 'center', fontWeight: 'bold'
+                            }}
+                            options={{
+                                precision: 2,
+                                separator: ',',
+                                delimiter: '.',
+                                unit: '$ ',
+                                suffixUnit: ''
+                            }}
+                            type={'money'}
+                            onChangeText={value => handleCurrency(value)}
+                            value={currentValue}
                         />
                     </Content>
                     <Title> - </Title>
                     <Content>
                         <Title> BRL </Title>
                         <Flag source={brl} />
-                        <Input
-                        onChangeText={value => handleCurrency(value)}
-                        keyboardType='number-pad'
-                        
+                        <TextInputMask
+                            style={{
+                                height: 40, width: 100, backgroundColor: colors.white,
+                                margin: 5, borderRadius: 15, textAlign: 'center', fontWeight: 'bold'
+                            }}
+                            options={{
+                                precision: 2,
+                                separator: ',',
+                                delimiter: '.',
+                                unit: 'R$ ',
+                                suffixUnit: ''
+                            }}
+                            type={'money'}
+                            onChangeText={value => handleReal(value)}
+                            value={realValue}
                         />
                     </Content>
                 </>
-            ) : null
-            }
+            ) : (
+                    null
+                ))}
+
         </Container>
-        );
-    }
+    );
+}

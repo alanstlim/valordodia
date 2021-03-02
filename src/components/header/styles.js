@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import colors from '../../config/colors';
 
-export const Container = styled.View `
+export const Container = styled.View`
     height: 100px;
     width: 100%;
     background-color: ${colors.primary};
@@ -14,12 +14,12 @@ export const Container = styled.View `
     padding: 30px;
 `;
 
-export const Logo = styled.Image `
+export const Logo = styled.Image`
     width: 72px;
     height: 70px;
 `;
 
-export const Title = styled.Text `
+export const Title = styled.Text`
     font-size: 24px;
     font-weight: bold;
     margin-top: 10px;

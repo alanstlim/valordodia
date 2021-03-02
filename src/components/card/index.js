@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
+
 import api from '../../services/api';
+import Loading from '../../components/loading';
+import ModalChoose from '../../components/modalchoose';
 
-import { Container, Content, Flag, Title, Info, Pig, BottomContent, BottomText} from './styles';
+import { Container, Content, Flag, Title, Info, Pig, BottomContent, 
+    BottomText, LeftText, RightText, RowText} from './styles';
 
-import pig from '../../assets/pig.png';
+import pigif from '../../assets/pigif.gif';
 import ars from '../../assets/ARS.png';
 import aud from '../../assets/AUD.png';
 import btc from '../../assets/BTC.png';
@@ -23,16 +27,18 @@ export default function Card({
     flag='',
 }) {
     const [name, setName] = useState('');
-    const [high, setHigh] = useState('');
-    const [low, setLow] = useState('');
-    const [varBid, setVarBid] = useState('');
-    const [bid, setBid] = useState('');
+    const [high, setHigh] = useState(0);
+    const [low, setLow] = useState(0);
+    const [varBid, setVarBid] = useState(0);
+    const [bid, setBid] = useState(0);
+    const [load, setLoad] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
        loadData();
     }, []);
 
-    switch (currency) {
+    switch (currency.code) {
         case 'ARS':
             flag = ars;
             break;
@@ -73,43 +79,67 @@ export default function Card({
 
     const loadData = async () => {
         if (currency !== '') {
-            await api.get(currency).then((response) => {
+            setLoad(true);
+            await api.get(currency.code).then((response) => {
                 {
                     response.data.map((item) => {
                         setName(item.name);
-                        setHigh(item.high);
-                        setLow(item.low);
+                        setHigh(parseFloat(item.high).toFixed(2).replace('.',',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+                        setLow(parseFloat(item.low).toFixed(2).replace('.',',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
                         setVarBid(item.varBid);
-                        setBid(item.bid);
+                        setBid(parseFloat(item.bid).toFixed(2).replace('.',',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
                     })
                 }
             });
         }
+        setLoad(false)
+    }
+
+    const handleChoose = () => {
+        setIsVisible(true);
     }
 
     return (
         <Container>
-            {flag !== '' ? (
+            {load ? (
+                <Loading />
+            ) : (flag !== '' ? (
                 <>
                     <Flag source={flag} />
-                    <Title> {name.substr(0,18)} </Title>
+                    <Title> {name.substr(0, 18)} </Title>
                     <Content>
-                        <Info> Máximo : R$: {high} </Info>
-                        <Info> Mínimo : R$: {low} </Info>
-                        <Info> Variação : {varBid} </Info>
-                        <Info> Atual : R$ {bid} </Info>
+                        <RowText>
+                            <LeftText>
+                                <Info> Máximo :</Info>
+                                <Info> Mínimo : </Info>
+                                <Info> Variação : </Info>
+                            </LeftText>
+                            <RightText>
+                                <Info> R$: {high.toString().substr(0, 7)} </Info>
+                                <Info>R$: {low.toString().substr(0, 7)} </Info>
+                                <Info>{varBid} </Info>
+                            </RightText>
+                        </RowText>
+                        <BottomContent>
+                            <BottomText> R$: {bid} </BottomText>
+                        </BottomContent>
                     </Content>
                 </>
             ) : (
-                <>
-                    <Pig source={pig} />
-                    <TouchableOpacity onPress={() => loadData()}>
-                    <BottomContent>
-                        <BottomText> Escolha uma moeda</BottomText>
-                    </BottomContent>
-                    </TouchableOpacity>
-                </>
-            )}
+                    <>
+                        <Pig source={pigif} />
+                            <TouchableOpacity onPress={() => handleChoose()}>
+                                <BottomContent>
+                                    <BottomText> Escolha uma moeda</BottomText>
+                                </BottomContent>
+                            </TouchableOpacity>
+                        </>
+                    ))}
+            <ModalChoose
+                isVisible={isVisible}
+                hide={() => setIsVisible(false)}
+                loadData={loadData}
+            />
         </Container>
     );
 }

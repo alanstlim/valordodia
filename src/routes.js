@@ -13,8 +13,8 @@ const Routes = () => (
   <Router>
     <Stack key="root" hideNavBar>
       <Scene key="splash" component={SplashScreen} initial/>
-      <Scene key="bottomBar" tabBarComponent={props => <TabBar {...props} />} tabs tabBarPosition="bottom" >
-        <Scene key="home" component={Home} hideNavBar/>
+      <Scene key="bottomBar" tabBarComponent={props => <TabBar {...props} />} tabs tabBarPosition="bottom">
+        <Scene key="home" component={Home} hideNavBar />
         <Scene key="calculator" component={Calculator} hideNavBar />
         <Scene key="profile" component={Profile} hideNavBar/>
       </Scene>

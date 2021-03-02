@@ -20,7 +20,7 @@ import jpy from '../../assets/JPY.png';
 import ltc from '../../assets/LTC.png';
 import usd from '../../assets/USD.png';
 
-export default function ModalCurrency({
+export default function ModalChoose({
     isVisible=false, loadData, hide
 }) {
     const [selectedCurrencies, setSelectedCurrencies] = useState([]);
@@ -88,6 +88,21 @@ export default function ModalCurrency({
         },
     ];
 
+    useEffect(() => {
+        loadUser();
+    },[]);
+
+    const loadUser = async () => {
+        await getLocalUser().then((localUser) => {
+            localUser.currency.map((item) => {
+                if(typeof item.code !== "undefined") {
+                selectedCurrencies.push(item.code)
+            }
+            })
+        });
+        console.log(selectedCurrencies);
+    }
+
     const handleCheckBox = (item, checked) => {
         if (checked) {
             selectedCurrencies.push(item);
@@ -117,9 +132,7 @@ export default function ModalCurrency({
         >
             <StatusBar barStyle='light-content' backgroundColor={colors.secondary} />
             <Container>
-                <Logo source={pig} />
                 <Content>
-                    <Title> Bem vindo ao Valor do dia.</Title>
                     <Info> Escolha até quatro moedas para acompanhar diariamente.</Info>
                     <CurrencyContainer>
                         {currencyList.map((item) => {
@@ -128,14 +141,14 @@ export default function ModalCurrency({
                                 <CurrencyContent key={item.code.toString()}>
                                     <TouchableOpacity 
                                     onPress={() => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
-                                    disabled={isDisabled & !toggleCheckBox}
+                                    disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
                                     >
                                         <Flag source={item.flag} />
                                         <CheckBox
                                             disabled={false}
-                                            value={toggleCheckBox}
+                                            value={selectedCurrencies.indexOf(item.code) > -1 ? true : toggleCheckBox}
                                             style={{marginLeft: 20}}
-                                            disabled={isDisabled & !toggleCheckBox}
+                                            disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
                                             onValueChange={ () => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
                                         />
                                     </TouchableOpacity>
@@ -143,7 +156,8 @@ export default function ModalCurrency({
                             )
                         })}
                     </CurrencyContainer>
-                    <TouchableOpacity onPress={() => hide() & loadData(selectedCurrencies)}>
+                    {/* <TouchableOpacity onPress={() => hide() & loadData(selectedCurrencies)}> */}
+                    <TouchableOpacity onPress={() => hide() }>
                         <ButtonModal>
                             <ButtonText>
                                 Continuar

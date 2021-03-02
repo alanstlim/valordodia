@@ -9,6 +9,7 @@ export const Container = styled.View`
     background-color: ${colors.primary};
     border-radius: 20px;
     align-items: center;
+    justify-content: center;
     elevation: 8;
     shadow-opacity: 0.8;
     shadow-radius: 5px;
@@ -16,14 +17,25 @@ export const Container = styled.View`
 
 export const Content = styled.View`
     width: 100%;
+    align-items: center;
+`;
+
+export const RowText = styled.View`
+    flex-direction: row;
+`;
+
+export const LeftText = styled.View`
     align-items: flex-start;
-    padding: 10px;
+`;
+
+export const RightText = styled.View`
+    align-items: flex-end;
 `;
 
 export const BottomContent = styled.View`
     width: 100%;
     height: 50px;
-    margin-top: 26px;
+    margin-top: 8px;
     background-color: ${colors.dark};
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -41,7 +53,7 @@ export const Flag = styled.Image`
 export const Pig = styled.Image`
     height: 95px
     width: 100px;
-    margin: 50px;
+    margin: 59px;
 `;
 
 export const Title = styled.Text`

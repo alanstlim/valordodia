@@ -3,42 +3,41 @@ import { StatusBar} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { Container, Logo, Title } from './styles';
-import api from '../../services/api';
+import Loading from '../../components/loading';
 import { setLocalUser, getLocalUser } from '../../services/storage';
 import ModalCurrency from '../../components/modalcurrency';
 import colors from '../../config/colors';
-import pig from '../../assets/pig.png';
+import pigif from '../../assets/pigif.gif';
 
 export default function SplashScreen() {
 
-    const [currentUser, SetCurrentUser] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
+    const listCurrency = [];
 
     useEffect(() => {
         setIsVisible(false);
         const timer = setTimeout(() => {
             checkUser();
-        }, 1500)
+        }, 2500)
     }, [])
 
     const checkUser = async () => {
+        
+        // Reset Local User
+        // setLocalUser(null)
 
         await getLocalUser().then((localUser) => {
-           SetCurrentUser(localUser);
+            if (localUser === null) {
+                setIsVisible(true);
+            } else {
+                loadData(localUser.currency);
+            }
         });
-     
-        if (currentUser === null) {
-            setIsVisible(true);
-        } else {
-            loadData();
-        }
     }
 
     const loadData = async (selectedCurrencies) => {
-        const listCurrency = [];
-
             selectedCurrencies?.map((currency) => {
-                listCurrency.push(currency.code);
+               listCurrency.push(currency);
             });
 
             for (let i = listCurrency.length; i < 4; i++) {
@@ -47,7 +46,7 @@ export default function SplashScreen() {
 
         if (listCurrency.length !== 0) {
             setLocalUser({
-                currency: listCurrency,
+                currency: listCurrency
             })
         }
 
@@ -63,13 +62,16 @@ export default function SplashScreen() {
     return (
         <Container>
             <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
-            <Logo source={pig} />
+            <Logo source={pigif} />
             <Title> Valor do Dia</Title>
+            <Loading />
+            {isVisible ?
             <ModalCurrency
                 isVisible={isVisible}
                 hide={() => setIsVisible(false)}
                 loadData={loadData}
             />
+        : null }
         </Container>
     );
 

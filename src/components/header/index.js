@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Container, Title, Logo } from './styles';
-import pig from '../../assets/pig.png';
+import pigif from '../../assets/pigif.gif';
 
 export default function Header({ 
     title = ''
@@ -10,7 +10,7 @@ export default function Header({
     return (
         <Container >
             <Title> {title} </Title>
-            <Logo source={pig}/>
+            <Logo source={pigif}/>
         </Container>
 
     );

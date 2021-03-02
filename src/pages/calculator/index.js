@@ -18,7 +18,6 @@ export default function Calculator () {
     const loadData = async () => {
         await getLocalUser().then((localUser) => {
             setUser(localUser);
-            console.log(localUser)
         });
     }
 
