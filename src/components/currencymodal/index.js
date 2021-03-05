@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Modal, StatusBar, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { Modal, StatusBar, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox'
-import { getLocalUser, setLocalUser} from '../../services/storage';
 
 import { Container, Content, Logo, Title, Info, Flag, CurrencyContainer,
         CurrencyContent, ButtonModal, ButtonText } from './styles';
 import colors from '../../config/colors';
-import pig from '../../assets/pig.png';
+import pigif from '../../assets/pigif.gif';
 import ars from '../../assets/ARS.png';
 import aud from '../../assets/AUD.png';
 import btc from '../../assets/BTC.png';
@@ -20,7 +19,7 @@ import jpy from '../../assets/JPY.png';
 import ltc from '../../assets/LTC.png';
 import usd from '../../assets/USD.png';
 
-export default function ModalChoose({
+export default function CurrencyModal({
     isVisible=false, loadData, hide
 }) {
     const [selectedCurrencies, setSelectedCurrencies] = useState([]);
@@ -88,21 +87,6 @@ export default function ModalChoose({
         },
     ];
 
-    useEffect(() => {
-        loadUser();
-    },[]);
-
-    const loadUser = async () => {
-        await getLocalUser().then((localUser) => {
-            localUser.currency.map((item) => {
-                if(typeof item.code !== "undefined") {
-                selectedCurrencies.push(item.code)
-            }
-            })
-        });
-        console.log(selectedCurrencies);
-    }
-
     const handleCheckBox = (item, checked) => {
         if (checked) {
             selectedCurrencies.push(item);
@@ -132,7 +116,9 @@ export default function ModalChoose({
         >
             <StatusBar barStyle='light-content' backgroundColor={colors.secondary} />
             <Container>
+                <Logo source={pigif} />
                 <Content>
+                    <Title> Bem vindo ao Valor do dia.</Title>
                     <Info> Escolha até quatro moedas para acompanhar diariamente.</Info>
                     <CurrencyContainer>
                         {currencyList.map((item) => {
@@ -141,14 +127,14 @@ export default function ModalChoose({
                                 <CurrencyContent key={item.code.toString()}>
                                     <TouchableOpacity 
                                     onPress={() => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
-                                    disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
+                                    disabled={isDisabled & !toggleCheckBox}
                                     >
                                         <Flag source={item.flag} />
                                         <CheckBox
                                             disabled={false}
-                                            value={selectedCurrencies.indexOf(item.code) > -1 ? true : toggleCheckBox}
+                                            value={toggleCheckBox}
                                             style={{marginLeft: 20}}
-                                            disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
+                                            disabled={isDisabled & !toggleCheckBox}
                                             onValueChange={ () => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
                                         />
                                     </TouchableOpacity>
@@ -156,8 +142,7 @@ export default function ModalChoose({
                             )
                         })}
                     </CurrencyContainer>
-                    {/* <TouchableOpacity onPress={() => hide() & loadData(selectedCurrencies)}> */}
-                    <TouchableOpacity onPress={() => hide() }>
+                    <TouchableOpacity onPress={() => hide() & loadData(selectedCurrencies)}>
                         <ButtonModal>
                             <ButtonText>
                                 Continuar

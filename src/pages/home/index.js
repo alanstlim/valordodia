@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 import { Container, Content, Title } from './styles';
 
@@ -18,7 +17,7 @@ export default function Home() {
 
     const loadLocalUser = async () => {
         await getLocalUser().then((localUser) => {
-            setUser(localUser);
+        setUser(localUser);
         });
       };
 

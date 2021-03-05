@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
 import colors from '../../config/colors';
 
-export const Container = styled.View `
+export const Container = styled.View`
     flex: 1;
     align-items: center;
 `;
 
-export const Content = styled.View `
+export const Content = styled.View`
     width: 80%;
     height: 75%;
     margin: 35px;
@@ -16,8 +16,25 @@ export const Content = styled.View `
     elevation: 8;
     shadow-opacity: 0.8;
     shadow-radius: 5px;
+    align-items: center;
 `
 
-export const Menu = styled.FlatList `
+export const VoidContent = styled.View`
+    flex: 1;
+    margin: 35px;
+    border-radius: 20px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-around;
+`
+
+export const Info = styled.Text`
+    font-size: 18px;
+    color: ${colors.secondary};
+    font-weight: bold; 
+    text-align: center;
+`
+
+export const Menu = styled.FlatList`
 
 `

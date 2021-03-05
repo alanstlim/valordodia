@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import api from '../../services/api';
 import Loading from '../../components/loading';
-import ModalChoose from '../../components/modalchoose';
+import ChooseModal from '../choosemodal';
+import { setLocalUser, getLocalUser } from '../../services/storage';
 
 import { Container, Content, Flag, Title, Info, Pig, BottomContent, 
     BottomText, LeftText, RightText, RowText} from './styles';
@@ -33,6 +35,7 @@ export default function Card({
     const [bid, setBid] = useState(0);
     const [load, setLoad] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [listCurrency, setListCurrency] = useState([]);
 
     useEffect(() => {
        loadData();
@@ -95,6 +98,26 @@ export default function Card({
         setLoad(false)
     }
 
+
+    const loadNewCurrency = async (newList) => {
+        setLoad(true);
+        await newList?.map((currency) => {
+            listCurrency.push(currency);
+        });
+
+        for (let i = listCurrency.length; i < 4; i++) {
+            listCurrency.push('');
+        }
+
+        if (listCurrency.length !== 0) {
+            setLocalUser({
+                currency: listCurrency
+            })
+        }
+        Actions.bottomBar();
+        setLoad(false);
+    }
+
     const handleChoose = () => {
         setIsVisible(true);
     }
@@ -135,10 +158,10 @@ export default function Card({
                             </TouchableOpacity>
                         </>
                     ))}
-            <ModalChoose
+            <ChooseModal
                 isVisible={isVisible}
                 hide={() => setIsVisible(false)}
-                loadData={loadData}
+                loadNewList={loadNewCurrency}
             />
         </Container>
     );

@@ -9,13 +9,19 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.View`
-    height: 60%;
+    height: 63%;
     width: 75%;
     border-radius: 20px;
     background-color: ${colors.white};
     align-items: center;
-    padding: 15px;
+    padding: 10px;
     opacity: 1;
+`;
+
+export const Header = styled.View`
+    width: 100%;
+    align-items: flex-end;
+    padding: 5px;
 `;
 
 export const CurrencyContainer = styled.View`
@@ -34,6 +40,7 @@ export const ButtonModal = styled.View`
     background-color: ${colors.secondary};
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 `;
 
 export const ButtonText = styled.Text`
@@ -67,6 +74,6 @@ export const Title = styled.Text`
 
 export const Info = styled.Text`
     font-size: 16px;
-    margin: 5px;
+    margin: 2px;
     text-align: center;
 `;

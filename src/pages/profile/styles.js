@@ -40,13 +40,25 @@ export const MenuContent = styled.View`
     margin: 5px;
     border-bottom-width: 2px;
     align-items: center;
-
+    justify-content: center;
 `
+export const ItemMenu = styled.View`
+    width: 70%;
+    height: 40px;
+    margin: 5px;
+    align-items: center;
+    flex-direction: row;
+`
+export const Touchable = styled.TouchableOpacity`
+    align-items: center;
+    flex-direction: row;
+`
+
 export const MenuText = styled.Text`
     font-size: 16px;
     font-weight: bold;
     color: ${colors.dark};
-    text-align: center;
+    text-align: right;
     margin: 8px;
 `
 

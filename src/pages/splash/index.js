@@ -22,7 +22,6 @@ export default function SplashScreen() {
     }, [])
 
     const checkUser = async () => {
-        
         // Reset Local User
         // setLocalUser(null)
 
