@@ -24,9 +24,13 @@ export const Header = styled.View`
     padding: 5px;
 `;
 
+export const ScrollContainer = styled.ScrollView`
+    flex: 1;
+`;
+
 export const CurrencyContainer = styled.View`
     flex: 1;
-    margin: 15px;
+    margin: 10px;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -40,7 +44,7 @@ export const ButtonModal = styled.View`
     background-color: ${colors.secondary};
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-vertical: 2px;
 `;
 
 export const ButtonText = styled.Text`

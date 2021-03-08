@@ -8,19 +8,20 @@ export const Container = styled.View`
 
 export const Content = styled.View`
     width: 80%;
-    height: 75%;
-    margin: 35px;
+    height: 72%;
+    margin: 10px;
     border-radius: 20px;
     background-color: ${colors.primary};
     elevation: 8;
     shadow-opacity: 0.8;
     shadow-radius: 5px;
     align-items: center;
+    justify-content: center;
 `
 
 export const BottomContent = styled.View`
     width: 100%;
-    height: 70px;
+    height: 60px;
     align-items: center;
     justify-content: center;
     border-bottom-left-radius: 20px;
@@ -62,7 +63,15 @@ export const MenuText = styled.Text`
     margin: 8px;
 `
 
+export const HeaderText = styled.Text`
+    font-size: 24px;
+    font-weight: bold;
+    color: ${colors.dark};
+    text-align: right;
+    margin-top: 15px;
+`
+
 export const List = styled.FlatList`
     width: 90%;
-    margin: 50px;
+    margin: 10px;
 `

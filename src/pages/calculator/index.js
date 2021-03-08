@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { getLocalUser } from '../../services/storage';
-import { Container, Content, Menu, VoidContent, Info } from './styles';
+import { Container, Content, FlagContent, VoidContent, Info, ScrollContainer } from './styles';
 import Header from '../../components/header';
 import Card from '../../components/calculatorcard'
 import colors from '../../config/colors';
@@ -38,18 +38,22 @@ export default function Calculator () {
             <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Header title={"Valor em Real"} />
             <Content>
-                {isEmpty ? (
-                    <VoidContent>
-                        <Info> Nenhuma moeda foi selecionada para usar a calculadora. </Info>
-                        <Icon name="server-outline" size={60} color={colors.dark} />
-                    </VoidContent>
-                ) : (
-                        user.currency?.map((item, index) => {
-                            return (
-                                <Card key={index.toString()} currency={item} />
-                            );
-                        })
-                    )}
+                <ScrollContainer>
+                    <FlagContent>
+                        {isEmpty ? (
+                            <VoidContent>
+                                <Info> Nenhuma moeda foi selecionada para usar a calculadora. </Info>
+                                <Icon name="server-outline" size={60} color={colors.dark} />
+                            </VoidContent>
+                        ) : (
+                            user.currency?.map((item, index) => {
+                                return (
+                                    <Card key={index.toString()} currency={item} />
+                                );
+                            })
+                        )}
+                    </FlagContent>
+                </ScrollContainer>
             </Content>
         </Container>
     );

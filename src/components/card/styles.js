@@ -2,14 +2,14 @@ import styled from 'styled-components/native';
 import colors from '../../config/colors';
 
 export const Container = styled.View`
-    height: 37%;
-    width: 42%;
+    height: 45%;
+    width: 45%;
     margin: 7px;
     margin-top: 20px;
     background-color: ${colors.primary};
     border-radius: 20px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     elevation: 8;
     shadow-opacity: 0.8;
     shadow-radius: 5px;
@@ -35,7 +35,6 @@ export const RightText = styled.View`
 export const BottomContent = styled.View`
     width: 100%;
     height: 50px;
-    margin-top: 8px;
     background-color: ${colors.dark};
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -44,10 +43,9 @@ export const BottomContent = styled.View`
 `; 
 
 export const Flag = styled.Image`
-    height: 55px
-    width: 110px;
-    margin: 10px;
-    margin-top: 25px;
+    height: 40px;
+    width: 80px;
+    margin-top: 10px;
 `;
 
 export const Pig = styled.Image`
@@ -61,14 +59,14 @@ export const Title = styled.Text`
     color: ${colors.dark};
     font-weight: bold;
     text-align: center;
-    margin: 7px;
+    margin: 5px;
 `
 
 export const Info = styled.Text`
     font-size: 14px;
     color: ${colors.secondary};
     font-weight: bold; 
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 `
 
 export const BottomText = styled.Text`

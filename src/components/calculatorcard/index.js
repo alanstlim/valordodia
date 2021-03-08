@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ToastAndroid } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text'
 
 import api from '../../services/api';
@@ -78,15 +79,18 @@ export default function CalculatorCard({
     const loadData = async () => {
         if (currency !== '') {
             setLoad(true);
-            await api.get(currency.code).then((response) => {
-                {
-                    response.data.map((item) => {
-                        setName(item.name);
-                        setBid(parseFloat(item.bid).toFixed(2));
-                        setRealValue(parseFloat(item.bid).toFixed(2).replace('.',','));
-                    })
-                }
-            });
+            try {
+                await api.get(currency.code).then((response) => {
+                        response.data.map((item) => {
+                            setName(item.name);
+                            setBid(parseFloat(item.bid).toFixed(2));
+                            setRealValue(parseFloat(item.bid).toFixed(2).replace('.', ','));
+                        })
+                });
+            } catch (e) {
+                setLoad(false);
+                ToastAndroid.show("Houve um problema ao carregar os dados, tente novamente mais tarde." + e, ToastAndroid.LONG);
+            }
         }
         setLoad(false);
     }
@@ -130,7 +134,7 @@ export default function CalculatorCard({
             ) : (name !== '' ? (
                 <>
                     <Content>
-                        <Title> {name} </Title>
+                        <Title> {name.substring(0, 18)} </Title>
                         <Flag source={flag} />
                         <TextInputMask
                             style={{

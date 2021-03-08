@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, StatusBar, TouchableOpacity } from 'react-native';
+import { Modal, StatusBar, TouchableOpacity, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import colors from '../../config/colors';
@@ -31,10 +31,14 @@ export default function MenuModal({
                 return (
                     <BodyModal>
                         <Title> Contato </Title>
-                        <Info> Entre em contato e tire suas dúvidas, terei o maior prazer de responder.</Info>
+                        <Info> Entre em contato e dê sugestões, criticas ou tire dúvidas, terei o maior prazer de responder.</Info>
                         <ImageContent>
-                            <ImgNetwork source={github} />
-                            <ImgNetwork source={linkedin} />
+                            <TouchableOpacity onPress={() => Linking.openURL('https://github.com/alanstlim/valordodia')}>
+                                <ImgNetwork source={github} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => Linking.openURL('https://www.linkedin.com/in/alanstlim/')}>
+                                <ImgNetwork source={linkedin} />
+                            </TouchableOpacity>
                         </ImageContent>
                         <Info> O código do "Valor do Dia" é aberto, acesse o GitHub e personalize da forma que desejar.</Info>
                     </BodyModal>
@@ -50,8 +54,12 @@ export default function MenuModal({
                         <Info> Isso tornou possível o desenvolvimento do "Valor do Dia", desde já agradeço.</Info>
 
                         <Info marginTop> Links Úteis: </Info>
-                        <Info> contato@awesomeapi.com.br </Info>
-                        <Info> https://docs.awesomeapi.com.br/api-de-moedas</Info>
+                        <TouchableOpacity onPress={() => Linking.openURL('mailto:contato@awesomeapi.com.br')}>
+                            <Info> contato@awesomeapi.com.br </Info>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Linking.openURL('https://docs.awesomeapi.com.br/api-de-moedas')}>
+                            <Info> docs.awesomeapi.com.br/api-de-moedas</Info>
+                        </TouchableOpacity>
                     </BodyModal>
                 )
             default:

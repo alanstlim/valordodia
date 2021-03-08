@@ -9,25 +9,25 @@ export const Container = styled.View `
 `;
 
 export const Content = styled.View `
-    width: 140px;
+    width: 130px;
     align-items: center;
 `;
 
 export const Title = styled.Text `
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: ${colors.secondary};
-    margin: 5px;
+    margin: 2px;
 `;
 
 export const Flag = styled.Image `
-    height: 40px;
-    width: 80px;
+    height: 35px;
+    width: 70px;
     margin: 5px;
 `;
 
 export const Input = styled.TextInput `
-    width: 100px;
+    width: 90px;
     height: 40px;
     background-color: #fff;
     margin: 5px;

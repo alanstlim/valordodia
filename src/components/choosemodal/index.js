@@ -4,10 +4,8 @@ import CheckBox from '@react-native-community/checkbox'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getLocalUser } from '../../services/storage';
 
-import {
-    Container, Content, Info, Flag, CurrencyContainer,
-    CurrencyContent, ButtonModal, ButtonText, Header
-} from './styles';
+import { Container, ScrollContainer, Content, Info, Flag, CurrencyContainer,
+    CurrencyContent, ButtonModal, ButtonText, Header } from './styles';
 import colors from '../../config/colors';
 import pig from '../../assets/pig.png';
 import ars from '../../assets/ARS.png';
@@ -93,18 +91,17 @@ export default function ChooseModal({
     ];
 
     useEffect(() => {
-        loadUser();
+        loadFlag();
     }, []);
 
-    const loadUser = async () => {
-        await getLocalUser().then((localUser) => {
+    const loadFlag = () => {
+        getLocalUser().then((localUser) => {
             localUser.currency.map((item) => {
                 if (typeof item.code !== "undefined") {
                     selectedCurrencies.push(item.code)
                     newSelected.push(item);
                 }
             })
-
         });
 
     }
@@ -146,28 +143,30 @@ export default function ChooseModal({
                         </TouchableOpacity>
                     </Header>
                     <Info> Escolha até quatro moedas para acompanhar diariamente.</Info>
-                    <CurrencyContainer>
-                        {currencyList.map((item) => {
-                            const [toggleCheckBox, setToggleCheckBox] = useState(false);
-                            return (
-                                <CurrencyContent key={item.code.toString()}>
-                                    <TouchableOpacity
-                                        onPress={() => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
-                                        disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
-                                    >
-                                        <Flag source={item.flag} />
-                                        <CheckBox
-                                            disabled={false}
-                                            value={selectedCurrencies.indexOf(item.code) > -1 ? true : toggleCheckBox}
-                                            style={{ marginLeft: 20 }}
+                    <ScrollContainer>
+                        <CurrencyContainer>
+                            {currencyList?.map((item) => {
+                                const [toggleCheckBox, setToggleCheckBox] = useState(false);
+                                return (
+                                    <CurrencyContent key={item.code.toString()}>
+                                        <TouchableOpacity
+                                            onPress={() => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
                                             disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
-                                            onValueChange={() => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
-                                        />
-                                    </TouchableOpacity>
-                                </CurrencyContent>
-                            )
-                        })}
-                    </CurrencyContainer>
+                                        >
+                                            <Flag source={item.flag} />
+                                            <CheckBox
+                                                disabled={false}
+                                                value={selectedCurrencies.indexOf(item.code) > -1 ? true : toggleCheckBox}
+                                                style={{ marginLeft: 20 }}
+                                                disabled={selectedCurrencies.indexOf(item.code) > -1 ? true : !toggleCheckBox & isDisabled}
+                                                onValueChange={() => setToggleCheckBox(!toggleCheckBox) & handleCheckBox(item, !toggleCheckBox)}
+                                            />
+                                        </TouchableOpacity>
+                                    </CurrencyContent>
+                                )
+                            })}
+                        </CurrencyContainer>
+                    </ScrollContainer>
                     <TouchableOpacity onPress={() => hide() & loadNewList(newSelected)}>
                         <ButtonModal>
                             <ButtonText>

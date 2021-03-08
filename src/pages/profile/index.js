@@ -3,7 +3,7 @@ import { StatusBar, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 
-import { Container, Content, List, BottomContent, BottomText, MenuContent, MenuText, ItemMenu, Touchable } from './styles';
+import { Container, Content, List, BottomContent, BottomText, MenuContent, MenuText, ItemMenu, Touchable, HeaderText } from './styles';
 import { setLocalUser } from '../../services/storage';
 import ChooseModal from '../../components/choosemodal';
 import MenuModal from '../../components/menumodal';
@@ -128,7 +128,9 @@ export default function Profile () {
         <Container>
             <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Header title={"Configurações"} />
+            <>
             <Content>
+                <HeaderText> Valor do Dia </HeaderText>
                 <List
                     data={menu}
                     keyExtractor={(item, index) => index.toString()}
@@ -149,6 +151,7 @@ export default function Profile () {
                     </BottomContent>
                 </Touchable>
             </Content>
+            </>
             <MenuModal
                 isVisible={isVisible === "MenuModal" ? true : false}
                 hide={() => setIsVisible(false)}

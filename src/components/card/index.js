@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, ToastAndroid } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import api from '../../services/api';
@@ -33,6 +33,7 @@ export default function Card({
     const [low, setLow] = useState(0);
     const [varBid, setVarBid] = useState(0);
     const [bid, setBid] = useState(0);
+    const [dateDuotation, setDateQuotation] = useState(0);
     const [load, setLoad] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [listCurrency, setListCurrency] = useState([]);
@@ -83,17 +84,21 @@ export default function Card({
     const loadData = async () => {
         if (currency !== '') {
             setLoad(true);
-            await api.get(currency.code).then((response) => {
-                {
-                    response.data.map((item) => {
-                        setName(item.name);
-                        setHigh(parseFloat(item.high).toFixed(2).replace('.',',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-                        setLow(parseFloat(item.low).toFixed(2).replace('.',',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-                        setVarBid(item.varBid);
-                        setBid(parseFloat(item.bid).toFixed(2).replace('.',',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-                    })
-                }
-            });
+            try {
+                await api.get(currency.code).then((response) => {
+                        response.data.map((item) => {
+                            setName(item.name);
+                            setDateQuotation(item.create_date);
+                            setHigh(parseFloat(item.high).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+                            setLow(parseFloat(item.low).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+                            setVarBid(item.varBid);
+                            setBid(parseFloat(item.bid).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+                        })
+                });
+            } catch (e) {
+                setLoad(false);
+                ToastAndroid.show("Houve um problema ao carregar os dados, tente novamente mais tarde." + e, ToastAndroid.LONG);
+            }
         }
         setLoad(false)
     }
@@ -129,18 +134,22 @@ export default function Card({
             ) : (flag !== '' ? (
                 <>
                     <Flag source={flag} />
-                    <Title> {name.substr(0, 18)} </Title>
+                    <Title> {name.substring(0, 18)} </Title>
                     <Content>
                         <RowText>
                             <LeftText>
                                 <Info> Máximo :</Info>
                                 <Info> Mínimo : </Info>
                                 <Info> Variação : </Info>
+                                <Info> Data : </Info>
+                                <Info> Apuração : </Info>
                             </LeftText>
                             <RightText>
-                                <Info> R$: {high.toString().substr(0, 7)} </Info>
-                                <Info>R$: {low.toString().substr(0, 7)} </Info>
+                                <Info> R$: {high.toString().substring(0, 7)} </Info>
+                                <Info>R$: {low.toString().substring(0, 7)} </Info>
                                 <Info>{varBid} </Info>
+                                <Info> {dateDuotation.toString().substring(0,10).split('-').reverse().join('/')} </Info>
+                                <Info> {dateDuotation.toString().substring(11)} </Info>
                             </RightText>
                         </RowText>
                         <BottomContent>

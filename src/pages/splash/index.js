@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Logo, Title } from './styles';
 import Loading from '../../components/loading';
 import { setLocalUser, getLocalUser } from '../../services/storage';
-import ModalCurrency from '../../components/modalcurrency';
+import CurrencyModal from '../../components/currencymodal';
 import colors from '../../config/colors';
 import pigif from '../../assets/pigif.gif';
 
@@ -65,7 +65,7 @@ export default function SplashScreen() {
             <Title> Valor do Dia</Title>
             <Loading />
             {isVisible ?
-            <ModalCurrency
+            <CurrencyModal
                 isVisible={isVisible}
                 hide={() => setIsVisible(false)}
                 loadData={loadData}

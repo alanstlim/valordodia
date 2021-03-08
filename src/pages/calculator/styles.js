@@ -6,10 +6,14 @@ export const Container = styled.View`
     align-items: center;
 `;
 
+export const ScrollContainer = styled.ScrollView`
+    flex: 1;
+`;
+
 export const Content = styled.View`
     width: 80%;
     height: 75%;
-    margin: 35px;
+    margin: 10px;
     border-radius: 20px;
     padding: 10px;
     background-color: ${colors.primary};
@@ -17,6 +21,10 @@ export const Content = styled.View`
     shadow-opacity: 0.8;
     shadow-radius: 5px;
     align-items: center;
+`
+
+export const FlagContent = styled.View`
+    flex: 1;
 `
 
 export const VoidContent = styled.View`
@@ -33,8 +41,4 @@ export const Info = styled.Text`
     color: ${colors.secondary};
     font-weight: bold; 
     text-align: center;
-`
-
-export const Menu = styled.FlatList`
-
 `
