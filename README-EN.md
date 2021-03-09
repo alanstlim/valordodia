@@ -1,3 +1,4 @@
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="drawing" width="20"/> [Versão em Português - README](https://github.com/alanstlim/valordodia/blob/main/README.md)
 # Value of Day // Quotation of Day
 
 ## About the Project
