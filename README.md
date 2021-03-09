@@ -35,7 +35,7 @@ Usar o comando: react-native run-android (Para criar a APK no emulador/dispositi
 
 Ou baixe o APK
 
-[Valor do Dia.apk](https://drive.google.com/file/d/1n1Q7dQgc5rQ3MzKZUMuqsKhSS13zFAsd/view?usp=sharing)
+[Valor_do_Dia.apk](https://drive.google.com/file/d/1IqSqf9uhvPhGRxWJBoaGXyU4xyQr_hgQ/view?usp=sharing)
 
 ## Extensões
 
