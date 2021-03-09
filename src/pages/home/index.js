@@ -30,15 +30,15 @@ export default function Home() {
         <Container>
             <StatusBar barStyle='dark-content' backgroundColor={colors.primary} />
             <Header title={"Cotação"} />
-            <ScrollContainer>
-                <Content>
-                    {user.currency?.map((item, index) => {
-                        return (
-                            <Card key={index.toString()} currency={item} />
-                        );
-                    })}
-                </Content>
-            </ScrollContainer>
+                <ScrollContainer>
+                    <Content>
+                        {user.currency?.map((item, index) => {
+                            return (
+                                <Card key={index.toString()} currency={item} />
+                            );
+                        })}
+                    </Content>
+                </ScrollContainer>
         </Container>
 
     );

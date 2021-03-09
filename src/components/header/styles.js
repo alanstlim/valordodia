@@ -12,6 +12,7 @@ export const Container = styled.View`
     shadow-radius: 5px;
     flex-direction: row;
     padding: 30px;
+    margin-bottom: 5px;
 `;
 
 export const Logo = styled.Image`

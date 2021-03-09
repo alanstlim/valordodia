@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import colors from '../../config/colors';
 
 export const Container = styled.View`
-    height: 100%;
+    flex: 1;
 `;
 
 export const ScrollContainer = styled.ScrollView`
@@ -10,7 +10,7 @@ export const ScrollContainer = styled.ScrollView`
 `;
 
 export const Content = styled.View`
-    height: 100%;
+    flex: 1;
     margin-top: 10px;
     justify-content: center;
     align-items: center;

@@ -14,17 +14,23 @@ export const Content = styled.View`
     border-radius: 20px;
     background-color: ${colors.white};
     align-items: center;
-    padding: 15px;
     opacity: 1;
 `;
 
 export const BodyModal = styled.View`
+    flex: 1;
     align-items: center;
     justify-content: space-between;
+    padding: 10px;
+
+`;
+
+export const Scroll = styled.ScrollView`
+    flex: 1;
 `;
 
 export const ImageContent = styled.View`
-    height: 250px;
+    height: 200px;
     justify-content: center;
     align-items: center;
     flex-direction: row;
@@ -39,25 +45,26 @@ export const Header = styled.View`
 export const Title = styled.Text`
     font-size: 24px;
     font-weight: bold;
-    margin-top: ${(props) => props.marginTop ? '20px' : '2px'};
+    margin-vertical: ${(props) => props.marginTop ? '10px' : '2px'};
     margin-bottom: 7px;
+    text-align: center;
     color: ${colors.secondary}
 `;
 
 export const Info = styled.Text`
     font-size: 15px;
-    margin-top:  ${(props) => props.marginTop ? '25px' : '5px'};
+    margin-vertical:  ${(props) => props.marginTop ? '15px' : '5px'};
     text-align: center;
 `;
 
 export const SubInfo = styled.Text`
     font-size: 12px;
-    margin-top: 30px;
+    margin-vertical: 35px;
     text-align: center;
 `;
 
 export const ImgNetwork = styled.Image`
     width: 50px;
     height: 50px;
-    margin: 20px;
+    margin: 15px;
 `;

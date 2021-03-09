@@ -6,7 +6,7 @@ import colors from '../../config/colors';
 import github from '../../assets/github.png';
 import linkedin from '../../assets/linkedin.png';
 
-import { Container, Content, BodyModal, ImageContent, Header, Title, Info, SubInfo, ImgNetwork } from './styles';
+import { Container, Content, BodyModal, ImageContent, Header, Title, Info, SubInfo, ImgNetwork, Scroll } from './styles';
 
 export default function MenuModal({
     isVisible = false, hide, typeModal=''
@@ -17,6 +17,7 @@ export default function MenuModal({
             case 'about':
                 return (
                     <BodyModal>
+                        <Scroll>
                         <Title> Sobre Nós </Title>
                         <Info> O Valor do Dia é um aplicativo que nasceu sob ideia de crescer, e quando digo crescer digo de forma intelectual,
                         e por em prática foi a melhor maneira que encontrei para testar esses conhecimentos.</Info>
@@ -25,11 +26,13 @@ export default function MenuModal({
                         <Info> Ela veio no momento em que comecei a me interessar no mercado internacional e ir atrás de pesquisar o "valor" da moeda do
                              país em especifico, logo juntei o útil ao agradável</Info>
                         <SubInfo> Obs: "Valor do Dia" é um aplicativo de código aberto.</SubInfo>
+                        </Scroll>
                     </BodyModal>
                 )
             case 'contact':
                 return (
                     <BodyModal>
+                        <Scroll>
                         <Title> Contato </Title>
                         <Info> Entre em contato e dê sugestões, criticas ou tire dúvidas, terei o maior prazer de responder.</Info>
                         <ImageContent>
@@ -41,11 +44,13 @@ export default function MenuModal({
                             </TouchableOpacity>
                         </ImageContent>
                         <Info> O código do "Valor do Dia" é aberto, acesse o GitHub e personalize da forma que desejar.</Info>
+                        </Scroll>
                     </BodyModal>
                 )
             case 'dataFont':
                 return (
                     <BodyModal>
+                        <Scroll>
                         <Title> Fonte de Dados </Title>
                         <Info> Todos os dados fornecidos para o aplicativo são graças a AwesomeAPI.</Info>
 
@@ -60,6 +65,7 @@ export default function MenuModal({
                         <TouchableOpacity onPress={() => Linking.openURL('https://docs.awesomeapi.com.br/api-de-moedas')}>
                             <Info> docs.awesomeapi.com.br/api-de-moedas</Info>
                         </TouchableOpacity>
+                        </Scroll>
                     </BodyModal>
                 )
             default:
