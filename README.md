@@ -1,4 +1,4 @@
-<img src="https://www.estudopratico.com.br/wp-content/uploads/2016/03/bandeira-eua.jpg" alt="drawing" width="20"/> [English Version - README] (https://github.com/alanstlim/valordodia/blob/main/README-EN.md)
+<img src="https://www.estudopratico.com.br/wp-content/uploads/2016/03/bandeira-eua.jpg" alt="drawing" width="20"/> [English Version - README](https://github.com/alanstlim/valordodia/blob/main/README-EN.md)
 # Valor do Dia 
 
 ## Sobre esse projeto
