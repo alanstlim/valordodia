@@ -1,6 +1,8 @@
 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="drawing" width="20"/> [Versão em Português - README](https://github.com/alanstlim/valordodia/blob/main/README.md)
 # Value of Day // Quotation of Day
 
+<img src="https://github.com/alanstlim/valordodia/blob/main/Screens.png" alt="drawing" width="700"/>
+
 ## About the Project
 * The Value of Day is a mobile app that born of idea of improve, when i say improve, i said of intellectual form, and put in practice is the better way that i found for test my knowledge.
 * This is a open source project, feel free for modify of form that wish.
