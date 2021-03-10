@@ -36,9 +36,7 @@ Use command: yarn install (For install the necessaries dependencies)
 
 Use command: react-native run-android (For create the APK in emulate/device)
 
-Or download of APK
-
-[Value of Day.apk](https://drive.google.com/file/d/1IqSqf9uhvPhGRxWJBoaGXyU4xyQr_hgQ/view?usp=sharing)
+Or download [VoD.apk](https://drive.google.com/file/d/1IqSqf9uhvPhGRxWJBoaGXyU4xyQr_hgQ/view?usp=sharing)
 
 ## Extensions
 
