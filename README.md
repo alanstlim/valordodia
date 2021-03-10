@@ -36,9 +36,7 @@ Usar o comando: yarn install (Para instalar as dependências necessárias)
 
 Usar o comando: react-native run-android (Para criar a APK no emulador/dispositivo)
 
-Ou baixe o APK
-
-[Valor_do_Dia.apk](https://drive.google.com/file/d/1IqSqf9uhvPhGRxWJBoaGXyU4xyQr_hgQ/view?usp=sharing)
+Ou baixe [Valor_do_Dia.apk](https://drive.google.com/file/d/1IqSqf9uhvPhGRxWJBoaGXyU4xyQr_hgQ/view?usp=sharing)
 
 ## Extensões
 
