@@ -1,6 +1,8 @@
 <img src="https://www.estudopratico.com.br/wp-content/uploads/2016/03/bandeira-eua.jpg" alt="drawing" width="20"/> [English Version - README](https://github.com/alanstlim/valordodia/blob/main/README-EN.md)
+
 # Valor do Dia 
 <img src="https://github.com/alanstlim/valordodia/blob/main/Screens.png" alt="drawing" width="700"/>
+
 ## Sobre esse projeto
 *  O Valor do Dia é um aplicativo que nasceu sob ideia de crescer, e quando digo crescer digo de forma intelectual, e por em prática foi a melhor maneira que encontrei para testar esses conhecimentos.
 *  Esse é um projeto de código aberto, sinta-se livre para modificar da forma que desejar.
