@@ -39,6 +39,7 @@ Usar o comando: react-native run-android (Para criar a APK no emulador/dispositi
 Ou baixe [Valor_do_Dia.apk](https://drive.google.com/file/d/1IqSqf9uhvPhGRxWJBoaGXyU4xyQr_hgQ/view?usp=sharing)
 
 ## Extensões
+[Styled-Components] (https://github.com/styled-components/styled-components)
 
 [Router-Flux] (https://www.npmjs.com/package/react-native-router-flux)
 
